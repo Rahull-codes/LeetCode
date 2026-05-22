@@ -17,7 +17,6 @@ public:
                 total += maxval - minval;
             }
         }
-
         return total;
     }
 };
