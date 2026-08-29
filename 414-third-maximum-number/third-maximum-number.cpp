@@ -1,23 +1,28 @@
 class Solution {
 public:
     int thirdMax(vector<int>& nums) {
-        int n = nums.size();
 
-        set<int> mySet;
+        long long a = LLONG_MIN;
+        long long b = LLONG_MIN;
+        long long c = LLONG_MIN;
 
-        for (int i = 0; i < n; i++) {
-            mySet.insert(nums[i]);
+        for (long long x : nums) {
+            if (x == a || x == b || x == c) {
+                continue;
+            }
+
+            if (x > a) {
+                c = b;
+                b = a;
+                a = x;
+            } else if (x > b) {
+                c = b;
+                b = x;
+            } else if (x > c) {
+                c = x;
+            }
         }
 
-        auto it = mySet.rbegin();
-
-        if (mySet.size() < 3) {
-            return *it;
-        }
-
-        it++;
-        it++;
-
-        return *it;
+        return c == LLONG_MIN ? a : c;
     }
 };
