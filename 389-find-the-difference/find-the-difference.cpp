@@ -1,17 +1,16 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int n = s.size() , m = t.size();
-        sort(begin(s) , end(s));
-        sort(begin(t) , end(t));
+        int XOR = 0;
 
-        for(int i = 0 ; i < m ;i++){
-            if(n == 0 ) return t[i];
+        for(char &ch : s){
+            XOR ^= ch;
+        }
 
-            if(s[i] != t[i]){
-                return t[i]; 
-            }
-        } 
-        return ' ';
+        for(char &ch : t){
+            XOR ^= ch;
+        }
+
+        return (char) XOR;
     }
 };
