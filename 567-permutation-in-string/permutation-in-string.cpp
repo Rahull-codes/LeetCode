@@ -1,70 +1,17 @@
-// class Solution {
-// public:
-//     bool checkInclusion(string s1, string s2) {
-//         unordered_map<char, int> freq;
-//         unordered_map<char, int> temp;
-//         int i = 0;
-
-//         for (int j = 0; j < s1.size(); j++) {
-//             freq[s1[j]]++;
-//         }
-
-//         for (int j = 0; j < s2.size(); j++) {
-//             temp = freq;
-
-//             for (int i = j; i < j + s1.size(); i++) {
-//                 if (temp.count(s2[i])) {
-//                     temp[s2[i]]--;
-//                 }
-//             }
-//             for (auto it : temp) {
-//                 if (it.second != 0) {
-//                     return false;
-//                 }
-//             }
-//         }
-//         return true;
-//     }
-// };
-
-
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
+        int n = s1.length();
+        int m = s2.length();
 
-        unordered_map<char, int> freq;
+        sort(begin(s1) , end(s1));
 
-        for (char ch : s1) {
-            freq[ch]++;
-        }
+        for(int i = 0 ; i <= m-n ; i++){
+            string substring = s2.substr(i , n);
 
-        // Every possible window
-        for (int j = 0; j + s1.size() <= s2.size(); j++) {
+            sort(begin(substring) , end(substring));
 
-            unordered_map<char, int> temp = freq;
-
-            // Check current window
-            for (int i = j; i < j + s1.size(); i++) {
-
-                if (temp.count(s2[i])) {
-                    temp[s2[i]]--;
-                } 
-                else {
-                    break;
-                }
-            }
-
-            // Check whether all frequencies became 0
-            bool found = true;
-
-            for (auto it : temp) {
-                if (it.second != 0) {
-                    found = false;
-                    break;
-                }
-            }
-
-            if (found) {
+            if(substring == s1){
                 return true;
             }
         }
