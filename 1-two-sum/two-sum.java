@@ -4,11 +4,9 @@ class Solution {
         int[] res = new int[2];
 
         HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < n ; i++) {
-            map.put(nums[i], i);
-        }
 
         for (int i = 0; i < n; i++) {
+            
             Integer diff = target - nums[i];
             Integer idx = map.get(diff);
             if (idx != null && idx != i) {
@@ -20,6 +18,7 @@ class Solution {
                     res[1] = i;
                 }
             }
+            map.put(nums[i], i);
         }
         return res;
     }
